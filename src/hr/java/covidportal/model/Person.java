@@ -1,6 +1,5 @@
 package hr.java.covidportal.model;
 
-import java.io.LineNumberInputStream;
 import java.util.List;
 
 public class Person {

@@ -1,4 +1,9 @@
-package main.java.hr.java.covidportal.model;
+package hr.java.covidportal.main;
+
+import hr.java.covidportal.model.Country;
+import hr.java.covidportal.model.Disease;
+import hr.java.covidportal.model.Person;
+import hr.java.covidportal.model.Symptom;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +15,7 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner us = new Scanner(System.in);
-        hr.java.covidportal.model.Country[] countries = new Country[3];
+        Country[] countries = new Country[3];
         Symptom[] symptoms = new Symptom[3];
         Disease[] diseases = new Disease[3];
         Person[] persons = new Person[3]; // contains only the 3 main people entered by user
@@ -85,7 +90,7 @@ public class Main {
         System.out.println("Enter disease name:");
         String name = scanner.next();
         System.out.println("Enter disease symptoms:");
-        Symptom[] symptoms = new Symptom[5];
+        Symptom[] symptoms = new Symptom[6];
         symptoms[i] = enterSymptom(scanner);
         label:
         while (true) {
