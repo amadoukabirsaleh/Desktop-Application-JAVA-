@@ -1,5 +1,8 @@
 package hr.java.covidportal.model;
 
+import java.io.LineNumberInputStream;
+import java.util.List;
+
 public class Person {
 
     private String name;
@@ -7,15 +10,20 @@ public class Person {
     private int age;
     private Country country;
     private Disease infectedWithDisease;
-    private Person[] contactedPersons;
+    private List<Person> contactedPersons;
+    public static int instanceCount =0;
+    public Person(){
 
-    public Person(String name, String surname, int age, Country country, Disease infectedWithDisease, Person[] contactedPersons) {
+    }
+
+    public Person(String name, String surname, int age, Country country, Disease infectedWithDisease, List<Person> contactedPersons) {
         this.name = name;
         this.surname = surname;
         this.age = age;
         this.country = country;
         this.infectedWithDisease = infectedWithDisease;
         this.contactedPersons = contactedPersons;
+        instanceCount++;
     }
 
     public String getName() {
@@ -58,11 +66,14 @@ public class Person {
         this.infectedWithDisease = infectedWithDisease;
     }
 
-    public Person[] getContactedPersons() {
+    public List<Person> getContactedPersons() {
         return contactedPersons;
     }
 
-    public void setContactedPersons(Person[] contactedPersons) {
+    public void setContactedPersons(List<Person> contactedPersons) {
         this.contactedPersons = contactedPersons;
     }
+
+
+
 }
