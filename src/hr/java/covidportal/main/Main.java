@@ -22,8 +22,10 @@ public class Main {
         List<Person> people = new ArrayList<>(); // contains all persons with their contacted persons
 
         System.out.println("Enter data for 3 countries, 3 symptoms, 3 diseases & 3 persons...");
+/*
 
-     /*   //----------REQUESTING DATA OF COUNTRY----------------------
+
+      //----------REQUESTING DATA OF COUNTRY----------------------
              System.out.println("--------------------------------");
 
         System.out.println("\nEnter data for 3 countries...");
@@ -40,7 +42,7 @@ public class Main {
             symptoms[i] = enterSymptom(us);
         }
 
-        //----------REQUESTING DATA OF DISEASES----------------------
+    //----------REQUESTING DATA OF DISEASES----------------------
         System.out.println("\nEnter data for 3 diseases...");
         System.out.println("--------------------------------");
         for(int i=0;i<3;i++){
@@ -66,30 +68,29 @@ public class Main {
 
     //----------METHOD FOR ENTERING DATA OF COUNTRY----------------------
     public static Country enterCountry(Scanner scanner) {
-        System.out.println("Enter country name:");
+        System.out.print("Enter country name:");
         String name = scanner.next();
-        System.out.println("Enter country number of inhabitants:");
+        System.out.print("Enter country number of inhabitants:");
         int inhabitants = scanner.nextInt();
-
+        scanner.nextLine();
         return new Country(name, inhabitants);
     }
 
     //----------METHOD FOR ENTERING DATA OF SYMPTOM----------------------
     public static Symptom enterSymptom(Scanner scanner) {
-        System.out.println("Enter sypmtom name:");
+        System.out.print("Enter sypmtom name:");
         String name = scanner.next();
-        System.out.println("Enter symptom value:");
+        System.out.print("Enter symptom value:");
         String value = scanner.next();
-
         return new Symptom(name, value);
     }
 
     //----------METHOD FOR ENTERING DATA OF DISEASE----------------------
     public static Disease enterDisease(Scanner scanner) {
         int i = 0;
-        System.out.println("Enter disease name:");
+        System.out.print("Enter disease name:");
         String name = scanner.next();
-        System.out.println("Enter disease symptoms:");
+        System.out.println("Enter disease symptoms >>>");
         Symptom[] symptoms = new Symptom[6];
         symptoms[i] = enterSymptom(scanner);
         label:
@@ -121,15 +122,16 @@ public class Main {
         List<Person> contactedPersons = new ArrayList<>();
 
 
-        System.out.println("Enter person name");
+        System.out.print("Enter person name :");
         String name = scanner.next();
-        System.out.println("Enter person surname:");
+        System.out.print("Enter person surname:");
         String surname = scanner.next();
-        System.out.println("Enter person age:");
+        System.out.print("Enter person age:");
         int age = scanner.nextInt();
-        System.out.println("Enter person country:");
+        scanner.nextLine();
+        System.out.println("Enter person country details >>>");
         Country country = enterCountry(scanner);
-        System.out.println("Enter the details of the disease the person is infected with:");
+        System.out.println("Enter the details of the disease the person is infected with >>>");
         Disease disease = enterDisease(scanner);
         label:
         while (true) {
@@ -183,6 +185,7 @@ public class Main {
 
 
                 } else if (reply == 'N' || reply == 'n') {
+                    System.out.println("Data succesfully inserted...");
                     break;
                 } else {
                     System.out.print("Wrong input, try again...");
@@ -190,7 +193,7 @@ public class Main {
 
                 }
             } else {
-                System.out.println("Data succesfully inserted...");
+                System.out.println("Data succesfully inserted...\n");
                 break;
             }
         }
@@ -215,15 +218,16 @@ public class Main {
 
         List<Person> contactedPersons = new ArrayList<>();
         contactedPersons.add(relevantPerson);
-        System.out.println("Enter person name:");
+        System.out.print("Enter person name:");
         String name = scanner.next();
-        System.out.println("Enter person surname:");
+        System.out.print("Enter person surname:");
         String surname = scanner.next();
-        System.out.println("Enter person age:");
+        System.out.print("Enter person age:");
         int age = scanner.nextInt();
-        System.out.println("Enter person country:");
+        scanner.nextLine();
+        System.out.println("Enter person country details >>>");
         Country country = enterCountry(scanner);
-        System.out.println("Enter the details of the disease the person is infected with:");
+        System.out.println("Enter the details of the disease the person is infected with >>>");
         Disease disease = enterDisease(scanner);
         return new Person(name, surname, age, country, disease, contactedPersons);
 
