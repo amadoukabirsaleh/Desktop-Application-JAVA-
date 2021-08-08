@@ -1,22 +1,16 @@
 package hr.java.covidportal.model;
 
-public class Country {
+public class Country extends NamedEntity{
 
-    private String name;
+
     private int inhabitants;
 
     public Country(String name, int inhabitants) {
-        this.name = name;
+        super(name);
         this.inhabitants = inhabitants;
     }
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public int getInhabitants() {
         return inhabitants;

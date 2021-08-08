@@ -1,22 +1,16 @@
 package hr.java.covidportal.model;
 
-public class Symptom {
+public class Symptom extends NamedEntity{
 
-    private String name;
+
     private String value;
 
     public Symptom(String name, String value) {
-        this.name = name;
+        super(name);
         this.value = value;
     }
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getValue() {
         return value;
