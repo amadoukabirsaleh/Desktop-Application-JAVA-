@@ -98,7 +98,7 @@ public class Main {
            System.out.println("2. Virus");
            System.out.print("SELECTION >>> ");
            char response = scanner.next().charAt(0);
-            if (response == '2') {
+            if (Character.compare(response,'2')==0) {
                 System.out.print("Enter virus name: ");
                 String name = scanner.next();
                 System.out.println("Enter virus symptoms >>>");
@@ -113,11 +113,11 @@ public class Main {
                     System.out.println("2. No");
                     System.out.print("SELECTION >>> ");
                     char reply = scanner.next().charAt(0);
-                    if (reply == '1') {
+                    if (Character.compare(reply,'1')==0) {
                         i++;
                         symptoms[i] = selectFromSymptoms(listOfSymtoms,scanner);
 
-                    } else if (reply == '2') {
+                    } else if (Character.compare(reply,'2')==0) {
                         System.out.println("Data succesfully inserted...\n");
                         break;
                     } else {
@@ -131,7 +131,7 @@ public class Main {
 
 
             }
-            else if (response =='1') {
+            else if (Character.compare(response,'1')==0) {
                 System.out.print("Enter disease name: ");
                 String name = scanner.next();
                 System.out.println("Enter disease symptoms...");
@@ -146,11 +146,11 @@ public class Main {
                     System.out.println("2. No");
                     System.out.print("SELECTION >>> ");
                     char reply = scanner.next().charAt(0);
-                    if (reply == '1') {
+                    if (Character.compare(reply,'1')==0) {
                         i++;
                         symptoms[i] = selectFromSymptoms(listOfSymtoms,scanner);
 
-                    } else if (reply == '2') {
+                    } else if (Character.compare(reply,'2')==0) {
                         System.out.println("Data succesfully inserted...\n");
                         break;
                     } else {
@@ -199,16 +199,17 @@ public class Main {
                 System.out.println("2. No");
                 System.out.print("SELECTION >>> ");
                 char reply = scanner.next().charAt(0);
-                if (reply == '1') {
+                if (Character.compare(reply,'1')==0) {
                     counter++;
                     System.out.println("Enter the contacted person details >>>");
                     Person temp = new Person();
                     temp = contactedPersonDetails(scanner, temp);
                     contactedPersons.add(temp);
                     people.add(temp);
+                    System.out.println("\nData succesfully inserted...\n");
+                          break;
 
-
-                } else if (reply == '2') {
+                } else if (Character.compare(reply,'2')==0) {
                     System.out.println("Data succesfully inserted...\n");
 
                     break;
@@ -224,7 +225,7 @@ public class Main {
                 System.out.println("2. No");
                 System.out.print("SELECTION >>> ");
                 char reply = scanner.next().charAt(0);
-                if (reply == '1') {
+                if (Character.compare(reply,'1')==0) {
                     counter++;
 
                     // System.out.println ("Enter the contacted person details >>>");
@@ -254,7 +255,7 @@ public class Main {
                     }
 
 
-                } else if (reply == '2') {
+                } else if (Character.compare(reply,'2')==0) {
                     System.out.println("Data succesfully inserted...\n");
                     break;
                 } else {
