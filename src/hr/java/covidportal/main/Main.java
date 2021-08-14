@@ -339,14 +339,14 @@ public class Main {
         label111:  while(true) {
             System.out.println("SELECTION >>>");
             char c = scanner.next().charAt(0);
-            if (c == '0') {
+            if (Character.compare(c,'0')==0) {
                 return diseases.get(0);
 
-            } else if (c == '1') {
+            } else if (Character.compare(c,'1')==0) {
                 return diseases.get(1);
 
 
-            } else if (c == '2') {
+            } else if (Character.compare(c,'2')==0) {
                 return diseases.get(2);
 
             } else {
@@ -376,14 +376,14 @@ public class Main {
         label111:  while(true) {
             System.out.print("SELECTION >>>");
             char c = scanner.next().charAt(0);
-            if (c == '0') {
+            if (Character.compare(c,'0')==0) {
                 return symptoms.get(0);
 
-            } else if (c == '1') {
+            } else if (Character.compare(c,'1')==0) {
                 return symptoms.get(1);
 
 
-            } else if (c == '2') {
+            } else if (Character.compare(c,'2')==0) {
                 return symptoms.get(2);
 
             } else {
