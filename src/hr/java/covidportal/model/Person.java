@@ -71,26 +71,9 @@ public class Person {
 
     }
    public Person(){
-
-    }
-/*
-    public Person(String name, String surname, int age, Country country, Disease infectedWithDisease, List<Person> contactedPersons) {
-        this.name = name;
-        this.surname = surname;
-        this.age = age;
-        this.country = country;
-        this.infectedWithDisease = infectedWithDisease;
-        this.contactedPersons = contactedPersons;
-
-        if(this.infectedWithDisease instanceof Virus){
-             for(Person p : this.contactedPersons){
-                 p.setInfectedWithDisease((Disease) this.infectedWithDisease);
-             }
-        }
-
+  // TO BE REMOVED
     }
 
-   */
 
     public String getName() {
         return name;

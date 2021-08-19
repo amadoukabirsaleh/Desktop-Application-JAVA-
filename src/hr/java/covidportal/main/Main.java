@@ -8,57 +8,59 @@ import java.util.Scanner;
 
 public class Main {
 
-    static int counter = 0;
+    static int counter = 0; // This static variable is used to check whether it is or not the first person details that is being entered by user;)
+    private static final int NUMBER_OF_COUNTRIES = 3;
+    private static final int NUMBER_OF_PERSONS = 3;
+    private static final int NUMBER_OF_SYMPTOMS = 3;
+    private static final int NUMBER_OF_DISEASE = 3;
+
 
     public static void main(String[] args) {
 
         Scanner us = new Scanner(System.in);
-        Country[] countries = new Country[3];
-      //  Symptom[] symptoms = new Symptom[5];
-        List<Symptom> symptoms = new ArrayList<>();
-     // Disease[] diseases = new Disease[4];
-        List<Disease> diseases = new ArrayList<>();  //Array of diseases or viruses, using polymorphism power
-        Person[] persons = new Person[3]; // contains only the 3 main people entered by user
+        Country[] countries = new Country[NUMBER_OF_COUNTRIES];
+        Symptom symptoms [] = new Symptom[NUMBER_OF_SYMPTOMS];
+        Disease diseases [] = new Disease[NUMBER_OF_DISEASE];
+        Person[] persons = new Person[NUMBER_OF_PERSONS]; // contains only the 3 main people entered by user
         List<Person> people = new ArrayList<>(); // contains all persons with their contacted persons
 
-        // Initiating disease list with 2 diseases and 2 viruses
 
 
 
         System.out.println("Enter data for 3 countries, 3 symptoms, 3 diseases & 3 persons...");
-/*
+
 
 
       //----------REQUESTING DATA OF COUNTRY----------------------
              System.out.println("--------------------------------");
 
-        System.out.println("\nEnter data for 3 countries...");
-        for(int i=0;i<3;i++){
+        System.out.println("\nEnter data for "+ NUMBER_OF_COUNTRIES+ " countries...");
+        for(int i=0;i<NUMBER_OF_COUNTRIES;i++){
             System.out.println("Insert "+(i+1)+".Country>>>");
             countries[i] = enterCountry(us);
         }
-*/
+
         //----------REQUESTING DATA OF SYMPTOMS----------------------
         System.out.println("\nEnter data for 3 symptoms...");
         System.out.println("--------------------------------");
-        for(int i=0;i<3;i++){
+        for(int i=0;i<NUMBER_OF_SYMPTOMS;i++){
             System.out.println("Insert "+(i+1)+".Sypmtom>>>");
-            symptoms.add(enterSymptom(us));
+            symptoms[i] = enterSymptom(us);
         }
 
     //----------REQUESTING DATA OF DISEASES----------------------
         System.out.println("\nEnter data for 3 diseases/viruses...");
         System.out.println("--------------------------------");
-        for(int i=0;i<3;i++){
+        for(int i=0;i<NUMBER_OF_DISEASE;i++){
             System.out.println("Insert "+(i+1)+". Disease OR Virus>>>");
-            diseases.add(enterDisease(us,symptoms));
+            diseases [i] = enterDisease(us, symptoms);
         }
 
         //----------REQUESTING DATA OF PERSONS----------------------
         System.out.println("\nEnter data for 3 persons...");
         System.out.println("--------------------------------");
         boolean offerListOfPeople = false;// TO PRESENT TO THE USER THE LIST OF EXISTING PERSONS WHEN HE ENTERS DATA OF SECOND PERSON
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < NUMBER_OF_PERSONS; i++) {
             System.out.println("Insert " + (i + 1) + ".Person>>>");
             persons[i] = enterPerson(us, people, diseases, offerListOfPeople);
             people.add(persons[i]);
@@ -90,22 +92,23 @@ public class Main {
     }
 
     //----------METHOD FOR ENTERING DATA OF DISEASE----------------------
-    public static Disease enterDisease(Scanner scanner, List<Symptom> listOfSymtoms) {
-        int i = 0;
+    public static Disease enterDisease(Scanner scanner, Symptom [] arrayOfSymtoms) {
+        int arrayIndexOfSymptom = 0;
+        boolean moreSymptomNeeded = true;
 
-       label0: while(true) {
+       while(true) {
            System.out.println("1. Disease");
            System.out.println("2. Virus");
            System.out.print("SELECTION >>> ");
            char response = scanner.next().charAt(0);
-            if (Character.compare(response,'2')==0) {
+            if (response=='2') {
                 System.out.print("Enter virus name: ");
                 String name = scanner.next();
                 System.out.println("Enter virus symptoms >>>");
-                Symptom[] symptoms = new Symptom[6];
-                symptoms[i] = selectFromSymptoms(listOfSymtoms,scanner);
-                label:
-                while (true) {
+                Symptom[] symptoms = new Symptom[NUMBER_OF_SYMPTOMS];
+                symptoms[arrayIndexOfSymptom] = selectFromSymptoms(arrayOfSymtoms,scanner);
+
+                while (moreSymptomNeeded) {
 
 
                     System.out.println("Insert another symptom ?");
@@ -113,16 +116,16 @@ public class Main {
                     System.out.println("2. No");
                     System.out.print("SELECTION >>> ");
                     char reply = scanner.next().charAt(0);
-                    if (Character.compare(reply,'1')==0) {
-                        i++;
-                        symptoms[i] = selectFromSymptoms(listOfSymtoms,scanner);
+                    if (reply=='1') {
+                        arrayIndexOfSymptom++;
+                        symptoms[arrayIndexOfSymptom] = selectFromSymptoms(arrayOfSymtoms,scanner);
 
-                    } else if (Character.compare(reply,'2')==0) {
+                    } else if (reply=='2') {
                         System.out.println("Data succesfully inserted...\n");
-                        break;
+                        moreSymptomNeeded=false;
                     } else {
                         System.out.println("Wrong input, try again...");
-                        continue label;
+                        moreSymptomNeeded=true;
 
                     }
                 }
@@ -131,14 +134,14 @@ public class Main {
 
 
             }
-            else if (Character.compare(response,'1')==0) {
+            else if (response=='1') {
                 System.out.print("Enter disease name: ");
                 String name = scanner.next();
                 System.out.println("Enter disease symptoms...");
-                Symptom[] symptoms = new Symptom[6];
-                symptoms[i] = selectFromSymptoms(listOfSymtoms,scanner);
-                label:
-                while (true) {
+                Symptom[] symptoms = new Symptom[NUMBER_OF_SYMPTOMS];
+                symptoms[arrayIndexOfSymptom] = selectFromSymptoms(arrayOfSymtoms,scanner);
+                moreSymptomNeeded=true;
+                while (moreSymptomNeeded) {
 
 
                     System.out.println("Insert another symptom ?");
@@ -146,16 +149,16 @@ public class Main {
                     System.out.println("2. No");
                     System.out.print("SELECTION >>> ");
                     char reply = scanner.next().charAt(0);
-                    if (Character.compare(reply,'1')==0) {
-                        i++;
-                        symptoms[i] = selectFromSymptoms(listOfSymtoms,scanner);
+                    if (reply=='1') {
+                        arrayIndexOfSymptom++;
+                        symptoms[arrayIndexOfSymptom] = selectFromSymptoms(arrayOfSymtoms,scanner);
 
-                    } else if (Character.compare(reply,'2')==0) {
+                    } else if (reply=='2') {
                         System.out.println("Data succesfully inserted...\n");
-                        break;
+                        moreSymptomNeeded=false;
                     } else {
                         System.out.print("Wrong input, try again...");
-                        continue label;
+                        moreSymptomNeeded=true; // going back to ask the user entering the right selection again
 
                     }
                 }
@@ -163,7 +166,7 @@ public class Main {
 
             } else {
                 System.out.println("Wrong input, try again...");
-                continue label0;
+                continue ; // going back to ask the user entering the right selection again
 
             }
         }
@@ -171,8 +174,8 @@ public class Main {
 
     }
 
-    //----------METHOD FOR ENTERING DATA OF PERSONS----------------------
-    public static Person enterPerson(Scanner scanner, List<Person> people, List<Disease>diseases, boolean offerListOfPeople) {
+    //----------METHOD FOR ENTERING DATA OF PERSONS (Pretty Big one)----------------------
+    public static Person enterPerson(Scanner scanner, List<Person> people,Disease [] diseases, boolean offerListOfPeople) {
 
 
 
@@ -190,82 +193,68 @@ public class Main {
         Country country = enterCountry(scanner);
 
         Disease disease = selectFromDiseases(diseases,scanner);
+        boolean morePersonsNeeded = true;
 
-        label:
-        while (true) {
-            if (counter == 0 && offerListOfPeople == false) {
-                System.out.println("Is there a contacted person ?");
+        while (morePersonsNeeded) {
+            if (counter == 0 && offerListOfPeople == false) {//this if statement executes when it is the first persons details being entered
+                // the variable "offerListOfPeople" actually helps me to ensure showing to the user already existing people
+                System.out.println("\nData succesfully inserted...\n");
+                morePersonsNeeded = false; // exits the while loop
+
+            }
+            else if (counter != 0 && counter <= 3 && offerListOfPeople || people.get(0)!=null) {  // this executes when it is the second persons details being entered
+
+
+                System.out.println("Is there a/another contacted person ?");
+
                 System.out.println("1. Yes");
                 System.out.println("2. No");
                 System.out.print("SELECTION >>> ");
                 char reply = scanner.next().charAt(0);
-                if (Character.compare(reply,'1')==0) {
+                if (reply=='1') {
                     counter++;
-                    System.out.println("Enter the contacted person details >>>");
-                    Person temp = new Person();
-                    temp = contactedPersonDetails(scanner, temp);
-                    contactedPersons.add(temp);
-                    people.add(temp);
-                    System.out.println("\nData succesfully inserted...\n");
-                          break;
-
-                } else if (Character.compare(reply,'2')==0) {
-                    System.out.println("Data succesfully inserted...\n");
-
-                    break;
-                } else {
-                    System.out.print("Wrong input, try again...");
-                    continue label;
-
-                }
-            } else if (counter != 0 && counter <= 3 && offerListOfPeople || people.get(0)!=null) {
-
-                System.out.println("Is there a contacted person ?");
-                System.out.println("1. Yes");
-                System.out.println("2. No");
-                System.out.print("SELECTION >>> ");
-                char reply = scanner.next().charAt(0);
-                if (Character.compare(reply,'1')==0) {
-                    counter++;
-
-                    // System.out.println ("Enter the contacted person details >>>");
+                    // Showing to the user the persons details he/she already inserted before
                     System.out.println("Choose from this list below please...");
                     displayPersons(people);
 
-                    label2:
-                    while (true) {
-                        System.out.print("Enter exact Name from the list above: ");
+                   // The flag is already set to true if the previous if block did not execute
+                    while (morePersonsNeeded) {
+                        System.out.print("Enter the exact Name or Surname from the table above: ");
                         String contactedName = scanner.next();
                         boolean checker = false;
 
                         for (Person p : people) {
-                            if (p != null && p.getName().equals(contactedName)) {
-                                contactedPersons.add(p);
+                            if (p != null && (p.getName().equals(contactedName) || p.getSurname().equals(contactedName))) {
+                                contactedPersons.add(p); // ADDING THE Contacted person to the contactedPersons list of the current person
                                 checker = true;
                                System.out.println(p.getName()+" "+p.getSurname()+"✓");
-                                break label2;
+                                System.out.println("\nData succesfully inserted...\n");
+
+                                morePersonsNeeded=false;
 
                             }
-
                         }
                         if (checker == false) {
-                            System.out.print("Wrong input, try again...");
-                            continue label2;
+                            System.out.print("Wrong input, try again...\n");
+                            morePersonsNeeded=true;
                         }
+
+
                     }
 
 
-                } else if (Character.compare(reply,'2')==0) {
-                    System.out.println("Data succesfully inserted...\n");
-                    break;
+                } else if (reply=='2') {
+                    System.out.println("\nData succesfully inserted...\n");
+                    morePersonsNeeded=false;
                 } else {
                     System.out.print("Wrong input, try again...");
-                    continue label;
+                    morePersonsNeeded=true;
 
                 }
-            } else {
+            }
+            else {
                 System.out.println("Data succesfully inserted...\n");
-                break;
+                 morePersonsNeeded=false;
             }
         }
 
@@ -283,75 +272,49 @@ public class Main {
 
     /* ---------------------------------------HELPER METHODS FOR enterPerson METHOD-------------------------------------------------------*/
 
-
-    //---METHOD FOR ENTERING CONTACTED PERSONS DETAILS----------------
-    public static Person contactedPersonDetails(Scanner scanner, Person relevantPerson) {
-
-        List<Person> contactedPersons = new ArrayList<>();
-        contactedPersons.add(relevantPerson);
-        System.out.print("Enter person name: ");
-        String name = scanner.next();
-        System.out.print("Enter person surname: ");
-        String surname = scanner.next();
-        System.out.print("Enter person age: ");
-        int age = scanner.nextInt();
-        scanner.nextLine();
-        System.out.println("Enter person country details >>>");
-        Country country = enterCountry(scanner);
-        Disease disease = new Disease(null,null);
-        return new Person.Builder(name).withSurname(surname).withAge(age).withCountry(country).withDisease(disease).withContactedPersons(contactedPersons).build();
-    }
-
-
     //-------------METHOD FOR DISPLAYING PERSONS DATA--------------
     public static void displayPersons(List<Person> people) {
-
-        System.out.println("-----------------------------------------------------------------------------");
-        System.out.printf("%10s %30s %20s", "NAME", "SURNAME", "AGE");
+        System.out.println("-----------------------------------------------------------------------------------------------------------");
+        System.out.printf("%10s %30s %20s %20s %20s", "NAME", "SURNAME", "AGE", "COUNTRY", "DISEASE");
         System.out.println();
-        System.out.println("-----------------------------------------------------------------------------");
+        System.out.println("-----------------------------------------------------------------------------------------------------------");
         for (Person p : people) {
             if (p != null) {
-                System.out.format("%10s %30s %20d",
-                        p.getName(), p.getSurname(), p.getAge());
+                System.out.format("%10s %30s %20d %20s %20s",
+                        p.getName(), p.getSurname(), p.getAge(),p.getCountry().getName(),p.getInfectedWithDisease().getName());
                 System.out.println();
-                System.out.println("-----------------------------------------------------------------------------");
+                System.out.println("-----------------------------------------------------------------------------------------------------------");
             } else
                 break;
         }
     }
 
   //------------------METHOD FOR DISPLAYING DISEASES OR VIRUSES----------------------
-    public static Disease selectFromDiseases(List<Disease> diseases, Scanner scanner){
+    public static Disease selectFromDiseases(Disease [] diseases, Scanner scanner){
 
-        int j=0;
+        int diseaseNumber=0;
 
         System.out.println("Select the disease OR virus the person is infected with >>>");
         for(Disease e : diseases)
         {
 
-            System.out.println(j+") "+diseases.get(j).getName());
-            j++;
+            System.out.println(diseaseNumber+". "+diseases[diseaseNumber].getName());
+            diseaseNumber++;
 
 
         }
 
-        label111:  while(true) {
-            System.out.println("SELECTION >>>");
-            char c = scanner.next().charAt(0);
-            if (Character.compare(c,'0')==0) {
-                return diseases.get(0);
+        while(true) {
+            System.out.print("SELECTION >>>");
+            // REMEMBER THAT WHEN A STRING IS ENTERED INSTEAD OF INT, ELSE BLOCK DOES NOT EXECUTE BECAUSE IT THROWS AN EXCEPTION
+            int chosenDisease = scanner.nextInt();
+             if(chosenDisease >= 0 && chosenDisease < NUMBER_OF_DISEASE){ // dont forget to number of disease
+                return diseases[chosenDisease];
+            }
 
-            } else if (Character.compare(c,'1')==0) {
-                return diseases.get(1);
-
-
-            } else if (Character.compare(c,'2')==0) {
-                return diseases.get(2);
-
-            } else {
-                System.out.print("Wrong input, Select the number and try again...");
-                continue label111;
+           else {
+                System.out.print("Wrong input, Select the number and try again...\n");
+                continue;
             }
         }
 
@@ -360,35 +323,27 @@ public class Main {
 
 
     //------------------METHOD FOR SELECTING FROM SYMPTOMS----------------------
-    public static Symptom selectFromSymptoms(List<Symptom> symptoms, Scanner scanner){
-        int j=0;
-
+    public static Symptom selectFromSymptoms(Symptom[] symptoms, Scanner scanner){
+        int arrayIndexOfSymptom=0;
 
         for(Symptom s : symptoms)
         {
 
-            System.out.println(j+". "+symptoms.get(j).getName()+" ("+symptoms.get(j).getValue()+")");
-            j++;
+            System.out.println(arrayIndexOfSymptom+". "+symptoms[arrayIndexOfSymptom].getName()+" ("+symptoms[arrayIndexOfSymptom].getValue()+")");
+            arrayIndexOfSymptom++;
 
 
         }
 
-        label111:  while(true) {
+        while(true) {
             System.out.print("SELECTION >>>");
-            char c = scanner.next().charAt(0);
-            if (Character.compare(c,'0')==0) {
-                return symptoms.get(0);
-
-            } else if (Character.compare(c,'1')==0) {
-                return symptoms.get(1);
-
-
-            } else if (Character.compare(c,'2')==0) {
-                return symptoms.get(2);
-
-            } else {
-                System.out.print("Wrong input, Select the number and try again...");
-                continue label111;
+            int chosenSymptom = scanner.nextInt();
+            if (chosenSymptom >= 0 && chosenSymptom < NUMBER_OF_SYMPTOMS) {
+                return symptoms[chosenSymptom];
+            }
+            else {
+                System.out.print("Wrong input, Select the number and try again...\n");
+                continue;
             }
         }
 
@@ -398,7 +353,3 @@ public class Main {
 
 }
 
-
-// NOTICE FOR TOMORROW : Refine the methods by implementing adding more contacted persons, more disease ..
-// ALSO, for the person class, there is an issue because the class contains itself as an object instance
-// thus it is repeating while entering data into an instance of it

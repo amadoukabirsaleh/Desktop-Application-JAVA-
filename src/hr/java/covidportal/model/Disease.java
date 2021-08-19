@@ -3,7 +3,7 @@ package hr.java.covidportal.model;
 public class Disease extends NamedEntity{
 
 
-    Symptom [] symptoms;
+    private Symptom [] symptoms;
 
 
     public Disease(String name, Symptom[] symptoms) {

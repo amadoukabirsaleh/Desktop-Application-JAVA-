@@ -2,7 +2,7 @@ package hr.java.covidportal.model;
 
 public abstract class NamedEntity {
 
-    String name;
+    private String name;
 
     public NamedEntity(String name) {
         this.name = name;
