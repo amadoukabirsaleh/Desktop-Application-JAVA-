@@ -40,6 +40,7 @@ public class Person {
         }
         public Builder withDisease(Disease disease){
             this.infectedWithDisease = disease;
+            // Java pattern 15 must be inserted here
 
             return this;
         }
@@ -61,7 +62,12 @@ public class Person {
             person.infectedWithDisease=this.infectedWithDisease;
             person.contactedPersons=this.contactedPersons;
 
-
+            // Java pattern 15 must be inserted here
+            if(this.infectedWithDisease instanceof Virus){
+                  for (Person p : person.contactedPersons){
+                      ((Virus) this.infectedWithDisease).transferInfectionToPerson(p);
+                  }
+            }
 
             return person;
         }
@@ -70,9 +76,7 @@ public class Person {
 
 
     }
-   public Person(){
-  // TO BE REMOVED
-    }
+
 
 
     public String getName() {
